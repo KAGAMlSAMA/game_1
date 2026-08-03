@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "ZCOOL KuaiLe", "Noto Sans SC", sans-serif;
+  --font-ui: "Noto Sans SC", sans-serif;
+  --color-panel: #131c38;
+  --color-panel2: #1b2a52;
+  --color-panel3: #24365f;
+  --color-line: #3d5590;
+  --color-gold: #ffcf6b;
+  --color-gold2: #ffa733;
+  --color-leaf: #7ac74f;
+  --color-hp: #ff5b6a;
+  --color-mp: #4aa3ff;
+  --color-xp: #ffd94a;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #0a0f22;
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+}
+
+canvas {
+  display: block;
+  image-rendering: auto;
+}
+
+/* ---------- 通用面板窗口（枫之谷风格） ---------- */
+.ms-window {
+  background: linear-gradient(180deg, #1c2a52 0%, #131c38 100%);
+  border: 2px solid #4a639e;
+  outline: 2px solid #0a0f22;
+  border-radius: 10px;
+  box-shadow:
+    0 0 0 1px #6f8bc9 inset,
+    0 14px 40px rgba(0, 0, 0, 0.55);
+}
+.ms-titlebar {
+  background: linear-gradient(180deg, #33497e, #22345f);
+  border-bottom: 2px solid #4a639e;
+  border-radius: 8px 8px 0 0;
+}
+.ms-btn {
+  background: linear-gradient(180deg, #ffd97a, #ffa733);
+  border: 2px solid #8a5a12;
+  border-radius: 8px;
+  color: #5a3305;
+  font-family: var(--font-display);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+  box-shadow: 0 3px 0 #8a5a12, 0 6px 12px rgba(0, 0, 0, 0.35);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.12s;
+}
+.ms-btn:hover {
+  filter: brightness(1.08);
+}
+.ms-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #8a5a12, 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+.ms-btn:disabled {
+  filter: grayscale(0.9) brightness(0.7);
+  cursor: not-allowed;
+}
+.ms-chip {
+  background: linear-gradient(180deg, #2c4076, #1d2c55);
+  border: 1.5px solid #4a639e;
+  border-radius: 8px;
+}
+.ms-slot {
+  background: linear-gradient(180deg, #0e1730, #16224a);
+  border: 1.5px solid #35497e;
+  border-radius: 8px;
+  transition: border-color 0.1s, transform 0.08s;
+}
+.ms-slot:hover {
+  border-color: #8fb3ff;
+  transform: translateY(-1px);
+}
+
+.rarity-0 { color: #cfd8e3; }
+.rarity-1 { color: #58a8ff; }
+.rarity-2 { color: #c06bff; }
+.rarity-3 { color: #ff9d2e; }
+.rarity-border-0 { border-color: #5a6a80 !important; }
+.rarity-border-1 { border-color: #58a8ff !important; }
+.rarity-border-2 { border-color: #c06bff !important; }
+.rarity-border-3 { border-color: #ff9d2e !important; box-shadow: 0 0 10px rgba(255, 157, 46, 0.45); }
+
+/* ---------- 动画 ---------- */
+@keyframes leaf-fall {
+  0% { transform: translateY(-8vh) translateX(0) rotate(0deg); opacity: 0; }
+  8% { opacity: 0.9; }
+  100% { transform: translateY(110vh) translateX(60px) rotate(540deg); opacity: 0.4; }
+}
+.leaf-fall { animation: leaf-fall linear infinite; }
+
+@keyframes bob-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.bob-y { animation: bob-y 2.4s ease-in-out infinite; }
+
+@keyframes pop-in {
+  0% { transform: scale(0.85) translateY(14px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+.pop-in { animation: pop-in 0.22s cubic-bezier(0.22, 1.4, 0.36, 1) both; }
+
+@keyframes log-in {
+  0% { transform: translateX(-14px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+.log-in { animation: log-in 0.18s ease-out both; }
+
+@keyframes gold-shine {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.gold-shine {
+  background: linear-gradient(100deg, #ffd97a 30%, #fff6d8 50%, #ffd97a 70%);
+  background-size: 200% 100%;
+  animation: gold-shine 2.6s linear infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes bar-flash {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.6); }
+}
+.bar-flash { animation: bar-flash 0.8s ease-in-out infinite; }
+
+/* 滚动条 */
+.ms-scroll::-webkit-scrollbar { width: 8px; }
+.ms-scroll::-webkit-scrollbar-track { background: #0e1730; border-radius: 8px; }
+.ms-scroll::-webkit-scrollbar-thumb { background: #3d5590; border-radius: 8px; }
+.ms-scroll::-webkit-scrollbar-thumb:hover { background: #5a78bd; }
+
+.keycap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #3a4f86, #22345f);
+  border: 1.5px solid #5a78bd;
+  box-shadow: 0 2px 0 #101a38;
+  color: #ffe9b8;
+  font-family: var(--font-display);
+  font-size: 12px;
+  line-height: 1;
+}
